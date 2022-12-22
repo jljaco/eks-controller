@@ -219,6 +219,7 @@ const (
 	UpdateParamType_AddonVersion             UpdateParamType = "AddonVersion"
 	UpdateParamType_ServiceAccountRoleArn    UpdateParamType = "ServiceAccountRoleArn"
 	UpdateParamType_ResolveConflicts         UpdateParamType = "ResolveConflicts"
+	UpdateParamType_ConfigurationValues      UpdateParamType = "ConfigurationValues"
 	UpdateParamType_MaxUnavailable           UpdateParamType = "MaxUnavailable"
 	UpdateParamType_MaxUnavailablePercentage UpdateParamType = "MaxUnavailablePercentage"
 )
