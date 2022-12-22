@@ -25,6 +25,7 @@ import (
 // An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
 // in the Amazon EKS User Guide.
 type AddonSpec struct {
+
 	// The version of the add-on. The version must match one of the versions returned
 	// by DescribeAddonVersions (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html).
 	AddonVersion *string `json:"addonVersion,omitempty"`
@@ -34,24 +35,29 @@ type AddonSpec struct {
 	// The name of the cluster to create the add-on for.
 	ClusterName *string                                  `json:"clusterName,omitempty"`
 	ClusterRef  *ackv1alpha1.AWSResourceReferenceWrapper `json:"clusterRef,omitempty"`
-	// The name of the add-on. The name must match one of the names returned by
-	// DescribeAddonVersions (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html).
+	// The set of configuration values for the add-on that's created. The values
+	// that you provide are validated against the schema in DescribeAddonConfiguration
+	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html).
+	ConfigurationValues *string `json:"configurationValues,omitempty"`
+	// The name of the add-on. The name must match one of the names that DescribeAddonVersions
+	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html)
+	// returns.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name"`
 	// How to resolve field value conflicts for an Amazon EKS add-on. Conflicts
 	// are handled based on the value you choose:
 	//
-	//    * None – If the self-managed version of the add-on is installed on your
-	//    cluster, Amazon EKS doesn't change the value. Creation of the add-on might
-	//    fail.
+	//   - None – If the self-managed version of the add-on is installed on your
+	//     cluster, Amazon EKS doesn't change the value. Creation of the add-on might
+	//     fail.
 	//
-	//    * Overwrite – If the self-managed version of the add-on is installed
-	//    on your cluster and the Amazon EKS default value is different than the
-	//    existing value, Amazon EKS changes the value to the Amazon EKS default
-	//    value.
+	//   - Overwrite – If the self-managed version of the add-on is installed
+	//     on your cluster and the Amazon EKS default value is different than the
+	//     existing value, Amazon EKS changes the value to the Amazon EKS default
+	//     value.
 	//
-	//    * Preserve – Not supported. You can set this value when updating an
-	//    add-on though. For more information, see UpdateAddon (https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html).
+	//   - Preserve – Not supported. You can set this value when updating an
+	//     add-on though. For more information, see UpdateAddon (https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html).
 	//
 	// If you don't currently have the self-managed version of the add-on installed
 	// on your cluster, the Amazon EKS add-on is installed. Amazon EKS sets all
@@ -94,9 +100,18 @@ type AddonStatus struct {
 	// An object that represents the health of the add-on.
 	// +kubebuilder:validation:Optional
 	Health *AddonHealth `json:"health,omitempty"`
+	// Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
+	// +kubebuilder:validation:Optional
+	MarketplaceInformation *MarketplaceInformation `json:"marketplaceInformation,omitempty"`
 	// The date and time that the add-on was last modified.
 	// +kubebuilder:validation:Optional
 	ModifiedAt *metav1.Time `json:"modifiedAt,omitempty"`
+	// The owner of the add-on.
+	// +kubebuilder:validation:Optional
+	Owner *string `json:"owner,omitempty"`
+	// The publisher of the add-on.
+	// +kubebuilder:validation:Optional
+	Publisher *string `json:"publisher,omitempty"`
 	// The status of the add-on.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty"`

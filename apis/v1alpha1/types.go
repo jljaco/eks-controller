@@ -36,7 +36,11 @@ type AddonHealth struct {
 // Information about an add-on.
 type AddonInfo struct {
 	AddonName *string `json:"addonName,omitempty"`
-	Type      *string `json:"type_,omitempty"`
+	// Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
+	MarketplaceInformation *MarketplaceInformation `json:"marketplaceInformation,omitempty"`
+	Owner                  *string                 `json:"owner,omitempty"`
+	Publisher              *string                 `json:"publisher,omitempty"`
+	Type                   *string                 `json:"type_,omitempty"`
 }
 
 // An issue related to an add-on.
@@ -48,24 +52,30 @@ type AddonIssue struct {
 
 // Information about an add-on version.
 type AddonVersionInfo struct {
-	AddonVersion *string   `json:"addonVersion,omitempty"`
-	Architecture []*string `json:"architecture,omitempty"`
+	AddonVersion          *string   `json:"addonVersion,omitempty"`
+	Architecture          []*string `json:"architecture,omitempty"`
+	RequiresConfiguration *bool     `json:"requiresConfiguration,omitempty"`
 }
 
 // An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
 // in the Amazon EKS User Guide.
 type Addon_SDK struct {
-	AddonARN     *string      `json:"addonARN,omitempty"`
-	AddonName    *string      `json:"addonName,omitempty"`
-	AddonVersion *string      `json:"addonVersion,omitempty"`
-	ClusterName  *string      `json:"clusterName,omitempty"`
-	CreatedAt    *metav1.Time `json:"createdAt,omitempty"`
+	AddonARN            *string      `json:"addonARN,omitempty"`
+	AddonName           *string      `json:"addonName,omitempty"`
+	AddonVersion        *string      `json:"addonVersion,omitempty"`
+	ClusterName         *string      `json:"clusterName,omitempty"`
+	ConfigurationValues *string      `json:"configurationValues,omitempty"`
+	CreatedAt           *metav1.Time `json:"createdAt,omitempty"`
 	// The health of the add-on.
-	Health                *AddonHealth       `json:"health,omitempty"`
-	ModifiedAt            *metav1.Time       `json:"modifiedAt,omitempty"`
-	ServiceAccountRoleARN *string            `json:"serviceAccountRoleARN,omitempty"`
-	Status                *string            `json:"status,omitempty"`
-	Tags                  map[string]*string `json:"tags,omitempty"`
+	Health *AddonHealth `json:"health,omitempty"`
+	// Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
+	MarketplaceInformation *MarketplaceInformation `json:"marketplaceInformation,omitempty"`
+	ModifiedAt             *metav1.Time            `json:"modifiedAt,omitempty"`
+	Owner                  *string                 `json:"owner,omitempty"`
+	Publisher              *string                 `json:"publisher,omitempty"`
+	ServiceAccountRoleARN  *string                 `json:"serviceAccountRoleARN,omitempty"`
+	Status                 *string                 `json:"status,omitempty"`
+	Tags                   map[string]*string      `json:"tags,omitempty"`
 }
 
 // An Auto Scaling group that is associated with an Amazon EKS managed node
