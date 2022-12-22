@@ -83,6 +83,31 @@ func newResourceDelta(
 			delta.Add("Spec.Name", a.ko.Spec.Name, b.ko.Spec.Name)
 		}
 	}
+	if ackcompare.HasNilDifference(a.ko.Spec.OutpostConfig, b.ko.Spec.OutpostConfig) {
+		delta.Add("Spec.OutpostConfig", a.ko.Spec.OutpostConfig, b.ko.Spec.OutpostConfig)
+	} else if a.ko.Spec.OutpostConfig != nil && b.ko.Spec.OutpostConfig != nil {
+		if ackcompare.HasNilDifference(a.ko.Spec.OutpostConfig.ControlPlaneInstanceType, b.ko.Spec.OutpostConfig.ControlPlaneInstanceType) {
+			delta.Add("Spec.OutpostConfig.ControlPlaneInstanceType", a.ko.Spec.OutpostConfig.ControlPlaneInstanceType, b.ko.Spec.OutpostConfig.ControlPlaneInstanceType)
+		} else if a.ko.Spec.OutpostConfig.ControlPlaneInstanceType != nil && b.ko.Spec.OutpostConfig.ControlPlaneInstanceType != nil {
+			if *a.ko.Spec.OutpostConfig.ControlPlaneInstanceType != *b.ko.Spec.OutpostConfig.ControlPlaneInstanceType {
+				delta.Add("Spec.OutpostConfig.ControlPlaneInstanceType", a.ko.Spec.OutpostConfig.ControlPlaneInstanceType, b.ko.Spec.OutpostConfig.ControlPlaneInstanceType)
+			}
+		}
+		if ackcompare.HasNilDifference(a.ko.Spec.OutpostConfig.ControlPlanePlacement, b.ko.Spec.OutpostConfig.ControlPlanePlacement) {
+			delta.Add("Spec.OutpostConfig.ControlPlanePlacement", a.ko.Spec.OutpostConfig.ControlPlanePlacement, b.ko.Spec.OutpostConfig.ControlPlanePlacement)
+		} else if a.ko.Spec.OutpostConfig.ControlPlanePlacement != nil && b.ko.Spec.OutpostConfig.ControlPlanePlacement != nil {
+			if ackcompare.HasNilDifference(a.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName, b.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName) {
+				delta.Add("Spec.OutpostConfig.ControlPlanePlacement.GroupName", a.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName, b.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName)
+			} else if a.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName != nil && b.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName != nil {
+				if *a.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName != *b.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName {
+					delta.Add("Spec.OutpostConfig.ControlPlanePlacement.GroupName", a.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName, b.ko.Spec.OutpostConfig.ControlPlanePlacement.GroupName)
+				}
+			}
+		}
+		if !ackcompare.SliceStringPEqual(a.ko.Spec.OutpostConfig.OutpostARNs, b.ko.Spec.OutpostConfig.OutpostARNs) {
+			delta.Add("Spec.OutpostConfig.OutpostARNs", a.ko.Spec.OutpostConfig.OutpostARNs, b.ko.Spec.OutpostConfig.OutpostARNs)
+		}
+	}
 	if ackcompare.HasNilDifference(a.ko.Spec.ResourcesVPCConfig, b.ko.Spec.ResourcesVPCConfig) {
 		delta.Add("Spec.ResourcesVPCConfig", a.ko.Spec.ResourcesVPCConfig, b.ko.Spec.ResourcesVPCConfig)
 	} else if a.ko.Spec.ResourcesVPCConfig != nil && b.ko.Spec.ResourcesVPCConfig != nil {
