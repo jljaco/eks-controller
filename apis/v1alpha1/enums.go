@@ -26,6 +26,10 @@ const (
 	AMITypes_BOTTLEROCKET_x86_64        AMITypes = "BOTTLEROCKET_x86_64"
 	AMITypes_BOTTLEROCKET_ARM_64_NVIDIA AMITypes = "BOTTLEROCKET_ARM_64_NVIDIA"
 	AMITypes_BOTTLEROCKET_x86_64_NVIDIA AMITypes = "BOTTLEROCKET_x86_64_NVIDIA"
+	AMITypes_WINDOWS_CORE_2019_x86_64   AMITypes = "WINDOWS_CORE_2019_x86_64"
+	AMITypes_WINDOWS_FULL_2019_x86_64   AMITypes = "WINDOWS_FULL_2019_x86_64"
+	AMITypes_WINDOWS_CORE_2022_x86_64   AMITypes = "WINDOWS_CORE_2022_x86_64"
+	AMITypes_WINDOWS_FULL_2022_x86_64   AMITypes = "WINDOWS_FULL_2022_x86_64"
 )
 
 type AddonIssueCode string
@@ -59,6 +63,17 @@ type CapacityTypes string
 const (
 	CapacityTypes_ON_DEMAND CapacityTypes = "ON_DEMAND"
 	CapacityTypes_SPOT      CapacityTypes = "SPOT"
+)
+
+type ClusterIssueCode string
+
+const (
+	ClusterIssueCode_AccessDenied          ClusterIssueCode = "AccessDenied"
+	ClusterIssueCode_ClusterUnreachable    ClusterIssueCode = "ClusterUnreachable"
+	ClusterIssueCode_ConfigurationConflict ClusterIssueCode = "ConfigurationConflict"
+	ClusterIssueCode_InternalFailure       ClusterIssueCode = "InternalFailure"
+	ClusterIssueCode_ResourceLimitExceeded ClusterIssueCode = "ResourceLimitExceeded"
+	ClusterIssueCode_ResourceNotFound      ClusterIssueCode = "ResourceNotFound"
 )
 
 type ClusterStatus_SDK string
