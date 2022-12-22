@@ -237,6 +237,12 @@ type Logging struct {
 	ClusterLogging []*LogSetup `json:"clusterLogging,omitempty"`
 }
 
+// Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
+type MarketplaceInformation struct {
+	ProductID  *string `json:"productID,omitempty"`
+	ProductURL *string `json:"productURL,omitempty"`
+}
+
 // An object representing the health status of the node group.
 type NodegroupHealth struct {
 	Issues []*Issue `json:"issues,omitempty"`
