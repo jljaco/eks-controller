@@ -54,7 +54,7 @@ def coredns_addon(eks_client, simple_cluster) -> Tuple[k8s.CustomResourceReferen
     replacements["CR_NAME"] = cr_name
     replacements["ADDON_NAME"] = addon_name
     replacements["ADDON_VERSION"] = addon_version
-    replacements["CONFIGURATION_VALUES"] = configuration_values
+    replacements["CONFIGURATION_VALUES"] = "'" + configuration_values + "'"
     replacements["RESOLVE_CONFLICTS"] = resolve_conflicts
 
     resource_data = load_eks_resource(
